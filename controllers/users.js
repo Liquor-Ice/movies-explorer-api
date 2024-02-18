@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const NotFoundError = require('../errors/NotFoundError');
+const BadRequestError = require('../errors/NotFoundError');
 
 module.exports.getProfile = (req, res, next) => {
   User.findById(req.user._id).orFail(
@@ -19,7 +20,7 @@ module.exports.updateProfile = (req, res, next) => {
     { name: req.body.name, email: req.body.email },
     { new: true, runValidators: true },
   ).orFail(
-    () => new NotFoundError('Пользователь по данному ID не найден'),
+    () => new BadRequestError('Неверные данные пользователя'),
   )
     .then((user) => res.send({ data: user }))
     .catch(next);
