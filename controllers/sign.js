@@ -15,6 +15,7 @@ module.exports.signin = (req, res, next) => {
       return res.status(200).cookie('token', token, {
         maxAge: 3600000 * 24 * 7,
         httpOnly: true,
+        sameSite: true,
       })
         .end();
     })
