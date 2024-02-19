@@ -6,3 +6,5 @@ const { getProfile, updateProfile } = require('../controllers/users');
 router.get('/me', getProfile);
 // обновляет информацию о пользователе (email и имя)
 router.patch('/me', celUpdateProfile, updateProfile);
+
+module.exports = router;

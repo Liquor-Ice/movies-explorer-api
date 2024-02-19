@@ -10,3 +10,5 @@ router.post('/', celCreateMovie, createMovie);
 
 // удаляет сохранённый фильм по id
 router.delete('/:id', celDeleteMovie, deleteMovie);
+
+module.exports = router;
