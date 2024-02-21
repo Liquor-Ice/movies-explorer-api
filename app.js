@@ -8,8 +8,9 @@ const { errors } = require('celebrate');
 const router = require('./routes');
 const errorHandler = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { limiter } = require('./middlewares/rateLimiter');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, MONGO_URL } = process.env;
 const app = express();
 app.use(cors({
   origin: ['http://localhost:3001', 'http://qualiavision.nomoredomainswork.ru', 'https://qualiavision.nomoredomainswork.ru'],
@@ -18,7 +19,7 @@ app.use(cors({
 }));
 
 // подключаемся к серверу mongo
-mongoose.connect('mongodb://localhost:27017/moviedb', {
+mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
@@ -30,6 +31,7 @@ app.use(helmet());
 app.use(cookieParser());
 
 app.use(requestLogger); // подключаем логгер запросов
+app.use(limiter); // подключаем ограничитель числа запросов
 
 app.get('/crash-test', () => { // краш-тест сервера
   setTimeout(() => {

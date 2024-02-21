@@ -7,4 +7,4 @@
 
 IP 158.160.126.240
 
-Backend api.qualiavision.nomoredomainswork.ru
+Backend https://api.qualiavision.nomoredomainswork.ru

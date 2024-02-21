@@ -2,8 +2,8 @@ const { celebrate, Joi } = require('celebrate');
 
 const celUpdataProfile = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30).required(),
+    email: Joi.string().email().required(),
   }),
 });
 
@@ -25,7 +25,7 @@ const celCreateMovie = celebrate({
 
 const celDeleteMovie = celebrate({
   params: Joi.object().keys({
-    cardId: Joi.string().alphanum().length(24),
+    cardId: Joi.string().hex().length(24).required(),
   }),
 });
 
