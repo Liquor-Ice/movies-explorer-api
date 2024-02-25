@@ -1,13 +1,13 @@
 const { celebrate, Joi } = require('celebrate');
 
-const celUpdataProfile = celebrate({
+module.exports.celUpdataProfile = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30).required(),
     email: Joi.string().email().required(),
   }),
 });
 
-const celCreateMovie = celebrate({
+module.exports.celCreateMovie = celebrate({
   body: Joi.object().keys({
     country: Joi.string().required(),
     director: Joi.string().required(),
@@ -23,27 +23,23 @@ const celCreateMovie = celebrate({
   }),
 });
 
-const celDeleteMovie = celebrate({
+module.exports.celDeleteMovie = celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().hex().length(24).required(),
   }),
 });
 
-const celSignin = celebrate({
+module.exports.celSignin = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 });
 
-const celSignup = celebrate({
+module.exports.celSignup = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 });
-
-export {
-  celUpdataProfile, celCreateMovie, celDeleteMovie, celSignin, celSignup,
-};
