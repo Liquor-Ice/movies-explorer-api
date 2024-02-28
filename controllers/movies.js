@@ -49,7 +49,7 @@ module.exports.createMovie = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.dejeteMovie = (req, res, next) => {
+module.exports.deleteMovie = (req, res, next) => {
   const { id } = req.params;
   const user = req.user._id;
   Movie.findByIdAndDelete({ movieId: id, owner: user }).orFail(
