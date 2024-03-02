@@ -52,7 +52,7 @@ module.exports.createMovie = (req, res, next) => {
 module.exports.deleteMovie = (req, res, next) => {
   const { id } = req.params;
   const user = req.user._id;
-  Movie.findByIdAndDelete({ movieId: id, owner: user }).orFail(
+  Movie.findOneAndDelete({ movieId: id, owner: user }).orFail(
     () => {
       throw new BadRequestError('Данный пользователь не сохранял такой фильм');
     },
